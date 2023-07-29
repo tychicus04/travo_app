@@ -19,6 +19,7 @@ class SelectDateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBarContainerWidget(
       titleString: 'Select Date',
+      implementLeading: true,
       child: Column(
         children: [
           const SizedBox(
@@ -38,6 +39,9 @@ class SelectDateScreen extends StatelessWidget {
               if(args.value is PickerDateRange) {
                 rangeStartDate = args.value.startDate;
                 rangeEndDate = args.value.endDate;
+              } else {
+                rangeStartDate = null;
+                rangeEndDate = null;
               }
             },
           ),
@@ -54,7 +58,7 @@ class SelectDateScreen extends StatelessWidget {
           ButtonWidget(
             title: 'Cancel',
             ontap: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop([]);
             },
           ),
         ]

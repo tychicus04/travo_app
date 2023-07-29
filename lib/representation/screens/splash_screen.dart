@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: ImageHelper.loadFromAsset(
             AssetHelper.imageBackGroundSplash, 
             fit: BoxFit.fitWidth,
-          ),
+          ),  
         ),
         Positioned.fill(
           child: ImageHelper.loadFromAsset(

@@ -32,20 +32,25 @@ class AppBarContainerWidget extends StatelessWidget {
                 Row(
                   children: [
                     if(implementLeading) 
-                      Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(
-                              kDefaultPadding
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(
+                                kDefaultPadding
+                              ),
                             ),
+                            color: Colors.white,
                           ),
-                          color: Colors.white,
-                        ),
-                        padding: const EdgeInsets.all(kItemPadding),
-                        child: const Icon(
-                          FontAwesomeIcons.arrowLeft,
-                          color: Colors.black,
-                          size: kDefaultIconSize,
+                          padding: const EdgeInsets.all(kItemPadding),
+                          child: const Icon(
+                            FontAwesomeIcons.arrowLeft,
+                            color: Colors.black,
+                            size: kDefaultIconSize,
+                          ),
                         ),
                       ),
                     Expanded(

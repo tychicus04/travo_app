@@ -5,6 +5,7 @@ import 'package:project_02/representation/screens/select_date_screen.dart';
 import 'package:project_02/representation/widgets/app_bar_containner.dart';
 import 'package:project_02/representation/widgets/button_widget.dart';
 import 'package:project_02/representation/widgets/item_booking_widget.dart';
+import 'package:project_02/core/extensions/date_ext.dart';
 
 class HotelBookingScreen extends StatefulWidget {
   const HotelBookingScreen({super.key});
@@ -16,6 +17,9 @@ class HotelBookingScreen extends StatefulWidget {
 }
 
 class _HotelBookingScreenState extends State<HotelBookingScreen> {
+
+  String? dateSelected;
+
   @override
   Widget build(BuildContext context) {
     return AppBarContainerWidget(
@@ -39,9 +43,13 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
             ItemBookingWidget(
               icon: AssetHelper.icoDate, 
               title: 'Select Date', 
-              description: '13 Feb - 18 Feb 2021',
-              onTap: () {
-                Navigator.of(context).pushNamed(SelectDateScreen.routeName);
+              description: dateSelected ?? '13 Feb - 18 Feb 2021',
+              onTap: () async {
+                final result = await Navigator.of(context).pushNamed(SelectDateScreen.routeName);
+                if(!(result as List<DateTime?>).any((element) => element == null)) {
+                  dateSelected = '${result[0]?.getStartDate} - ${result[1]?.getEndDate}';
+                  setState(() {});
+                }
               }
             ),
             const SizedBox(
