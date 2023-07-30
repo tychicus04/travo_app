@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_02/core/constants/dismension_constants.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
+import 'package:project_02/representation/screens/guest_and_room_booking_screen.dart';
+import 'package:project_02/representation/screens/hotels_screen.dart';
 import 'package:project_02/representation/screens/select_date_screen.dart';
 import 'package:project_02/representation/widgets/app_bar_containner.dart';
 import 'package:project_02/representation/widgets/button_widget.dart';
@@ -19,6 +21,7 @@ class HotelBookingScreen extends StatefulWidget {
 class _HotelBookingScreenState extends State<HotelBookingScreen> {
 
   String? dateSelected;
+  String? guestAndRoomSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +62,22 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
               icon: AssetHelper.icoGuestAndRoom, 
               title: 'Guest and Room', 
               description: '2 Guest, 1 Room',
-              onTap: () {}
+              onTap: () async {
+                final result = await Navigator.of(context).pushNamed(GuestAndRoomBookingScreen.routeName);
+                if(!(result as List<int?>).any((element) => element == null)) {
+                  // guestAndRoomSelected = '${result[0]?.} - ${result[1]?}';
+                  setState(() {});
+                }
+              }
             ),
             const SizedBox(
               height: kDefaultPadding,
             ),
             ButtonWidget(
               title: 'Search',
-              ontap: () {},
+              ontap: () {
+                Navigator.of(context).pushNamed(HotelsScreen.routeName);
+              },
             ),
           ]
         )
