@@ -12,6 +12,9 @@ class AssetHelper {
   static const String japan = 'assets/images/japan.png';
   static const String turkey = 'assets/images/turkey.png';
   static const String dubai = 'assets/images/dubai.png';
+  static const String room1 = 'assets/images/room1.png';
+  static const String room2 = 'assets/images/room2.png';
+  static const String room3 = 'assets/images/room3.png';
 
   // icon
   static const String icoFlight = 'assets/icons/flight.png';
@@ -24,4 +27,6 @@ class AssetHelper {
   static const String icoRoom = 'assets/icons/room.png';
   static const String icoIncre = 'assets/icons/increase.png';
   static const String icoDecre = 'assets/icons/decrease.png';
+  static const String icoLocat = 'assets/icons/location.png';
+  static const String icoStar = 'assets/icons/star.png';
 }
