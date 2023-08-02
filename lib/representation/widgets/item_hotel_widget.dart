@@ -4,6 +4,7 @@ import 'package:project_02/core/constants/dismension_constants.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
 import 'package:project_02/core/helpers/image_healper.dart';
 import 'package:project_02/data/models/hotel_model.dart';
+import 'package:project_02/representation/screens/hotel_detail_screen.dart';
 import 'package:project_02/representation/widgets/button_widget.dart';
 import 'package:project_02/representation/widgets/dash_line.dart';
 
@@ -85,7 +86,7 @@ class ItemHotelWidget extends StatelessWidget {
                       hotelModel.star.toString(),
                     ),
                     Text(
-                      '- ${hotelModel.numberOfReview} reviews',
+                      ' (${hotelModel.numberOfReview} reviews)',
                       style: const TextStyle(
                         color: ColorPalette.subTitleColor,
                       ),
@@ -100,7 +101,7 @@ class ItemHotelWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            hotelModel.price.toString(),
+                            '\$${hotelModel.price.toString()}',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24
@@ -122,6 +123,7 @@ class ItemHotelWidget extends StatelessWidget {
                       child: ButtonWidget(
                         title: 'Book a room',
                         ontap: () {
+                          Navigator.of(context).pushNamed(HotelDetailScreen.routeName);
                         },
                       ),
                     ),

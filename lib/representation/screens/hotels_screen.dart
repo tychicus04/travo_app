@@ -17,7 +17,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
 
   final List<HotelModel> listHotel = [
     HotelModel(
-      hotelImage: AssetHelper.room1,
+      hotelImage: AssetHelper.hotel1,
       hotelName: 'Royal Palm Heritage',
       location: 'Purwokerto, Jateng',
       awayKilometer: '364 m',
@@ -26,7 +26,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
       price: 143,
     ),
     HotelModel(
-      hotelImage: AssetHelper.room2,
+      hotelImage: AssetHelper.hotel2,
       hotelName: 'Grand Luxury\'s',
       location: 'Banyumas, Jateng',
       awayKilometer: '2.3 km',
@@ -35,7 +35,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
       price: 234,
     ),
     HotelModel(
-      hotelImage: AssetHelper.room3,
+      hotelImage: AssetHelper.hotel3,
       hotelName: 'The Orlando House',
       location: 'Ajibarang, Jateng',
       awayKilometer: '1.1 km',
