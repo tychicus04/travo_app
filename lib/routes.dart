@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_02/data/models/hotel_model.dart';
 import 'package:project_02/representation/screens/guest_and_room_booking_screen.dart';
 import 'package:project_02/representation/screens/hotel_booking_screen.dart';
 import 'package:project_02/representation/screens/hotel_detail_screen.dart';
@@ -18,18 +19,19 @@ final Map<String, WidgetBuilder> routes = {
   SelectDateScreen.routeName: (context) => SelectDateScreen(), 
   GuestAndRoomBookingScreen.routeName: (context) => const GuestAndRoomBookingScreen(), 
   HotelsScreen.routeName: (context) => const HotelsScreen(), 
-  HotelDetailScreen.routeName: (context) => const HotelDetailScreen(), 
 };
-// MaterialPageRoute<dynamic>? generateRoutes(RouteSettings settings) {
-//   switch (settings.name) {
-//     case DetailHotelScreen.routeName:
-//       final HotelModel hotelModel = (settings.arguments as HotelModel);
-//       return MaterialPageRoute<dynamic>(
-//         settings: settings,
-//         builder: (context) => DetailHotelScreen(
-//           hotelModel: hotelModel,
-//         ),
-//       );
+MaterialPageRoute<dynamic>? generateRoutes(RouteSettings settings) {
+  switch (settings.name) {
+    case HotelDetailScreen.routeName:
+      final HotelModel hotelModel = (settings.arguments as HotelModel);
+      return MaterialPageRoute<dynamic>(
+        settings: settings,
+        builder: (context) => HotelDetailScreen(
+          hotelModel: hotelModel,
+        ),
+      );
+  }
+}
 //     case CheckOutScreen.routeName:
 //       final RoomModel roomModel = (settings.arguments as RoomModel);
 //       return MaterialPageRoute<dynamic>(

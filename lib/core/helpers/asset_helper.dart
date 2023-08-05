@@ -16,6 +16,7 @@ class AssetHelper {
   static const String hotel2 = 'assets/images/hotel2.png';
   static const String hotel3 = 'assets/images/hotel3.png';
   static const String hotelDetail = 'assets/images/hotel_detail.png';
+  static const String map = 'assets/images/map.png';
 
   // icon
   static const String icoFlight = 'assets/icons/flight.png';
