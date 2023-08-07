@@ -7,6 +7,7 @@ import 'package:project_02/representation/screens/hotel_screen.dart';
 import 'package:project_02/representation/screens/hotels_screen.dart';
 import 'package:project_02/representation/screens/intro_screen.dart';
 import 'package:project_02/representation/screens/select_date_screen.dart';
+import 'package:project_02/representation/screens/select_room_screen.dart';
 import 'package:project_02/representation/screens/splash_screen.dart';
 import 'package:project_02/representation/screens/main_app.dart';
 
@@ -19,7 +20,9 @@ final Map<String, WidgetBuilder> routes = {
   SelectDateScreen.routeName: (context) => SelectDateScreen(), 
   GuestAndRoomBookingScreen.routeName: (context) => const GuestAndRoomBookingScreen(), 
   HotelsScreen.routeName: (context) => const HotelsScreen(), 
+  SelectRoomScreen.routeName: (context) => const SelectRoomScreen(), 
 };
+// ignore: body_might_complete_normally_nullable
 MaterialPageRoute<dynamic>? generateRoutes(RouteSettings settings) {
   switch (settings.name) {
     case HotelDetailScreen.routeName:

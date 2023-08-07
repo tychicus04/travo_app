@@ -6,8 +6,10 @@ import 'package:project_02/core/constants/textstyle_constants.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
 import 'package:project_02/core/helpers/image_healper.dart';
 import 'package:project_02/data/models/hotel_model.dart';
+import 'package:project_02/representation/screens/select_room_screen.dart';
 import 'package:project_02/representation/widgets/button_widget.dart';
 import 'package:project_02/representation/widgets/dash_line.dart';
+import 'package:project_02/representation/widgets/item_ultility_hotel_widget.dart';
 
 class HotelDetailScreen extends StatefulWidget {
   const HotelDetailScreen({super.key, required this.hotelModel});
@@ -191,6 +193,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                           const Text(
                             '''You will find every comfort because many of the services that the hotel offers for travellers and of course the hotel is very comfortable.'''
                           ),
+                          ItemUltilityHotelWidget(),
                           const SizedBox(
                             height: kDefaultPadding
                           ),
@@ -215,8 +218,11 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                           const SizedBox(
                             height: kDefaultPadding * 2
                           ),
-                          const ButtonWidget(
-                            title: 'Select Room'
+                          ButtonWidget(
+                            title: 'Select Room',
+                            ontap: () {
+                              Navigator.of(context).pushNamed(SelectRoomScreen.routeName);
+                            }
                           ),
                         ]
                       ),

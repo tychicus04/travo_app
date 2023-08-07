@@ -17,6 +17,9 @@ class AssetHelper {
   static const String hotel3 = 'assets/images/hotel3.png';
   static const String hotelDetail = 'assets/images/hotel_detail.png';
   static const String map = 'assets/images/map.png';
+  static const String room1 = 'assets/images/room1.png';
+  static const String room2 = 'assets/images/room2.png';
+  static const String room3 = 'assets/images/room3.png';
 
   // icon
   static const String icoFlight = 'assets/icons/flight.png';
@@ -31,4 +34,8 @@ class AssetHelper {
   static const String icoDecre = 'assets/icons/decrease.png';
   static const String icoLocat = 'assets/icons/location.png';
   static const String icoStar = 'assets/icons/star.png';
+  static const String icoWifi = 'assets/icons/ico_wifi.png';
+  static const String icoBreakFast = 'assets/icons/ico_break_fast.png';
+  static const String icoNonSmoking = 'assets/icons/ico_non_smoke.png';
+  static const String icoNonRefundable = 'assets/icons/ico_non_refund.png';
 }
