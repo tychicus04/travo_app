@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
 import 'package:project_02/data/models/room_model.dart';
+import 'package:project_02/representation/screens/checkout_screen.dart';
 import 'package:project_02/representation/widgets/app_bar_containner.dart';
 import 'package:project_02/representation/widgets/item_room_booking_widget.dart';
 
@@ -50,7 +51,9 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
             .map(
               (e) => ItemRoomBookingWidget(
               roomModel: e,
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(CheckoutScreen.routeName);
+              },
               )
             )
             .toList()

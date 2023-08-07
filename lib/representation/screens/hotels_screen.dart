@@ -14,7 +14,6 @@ class HotelsScreen extends StatefulWidget {
 }
 
 class _HotelsScreenState extends State<HotelsScreen> {
-
   final List<HotelModel> listHotel = [
     HotelModel(
       hotelImage: AssetHelper.hotel1,

@@ -30,6 +30,7 @@ class AppBarContainerWidget extends StatelessWidget {
               backgroundColor: ColorPalette.backgroundScaffoldColor,
               title: title ?? 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     if(implementLeading) 
                       GestureDetector(
@@ -56,12 +57,13 @@ class AppBarContainerWidget extends StatelessWidget {
                     Expanded(
                       child: Center(
                         child: Column(
+                          
                           children: [
                             Text(
                               titleString ?? " ",
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 24,
                               )
                             )
                           ],
