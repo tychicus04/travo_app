@@ -219,12 +219,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: _buildItemCategory(
                   ImageHelper.loadFromAsset(
                     AssetHelper.icoHotel,
-                    width: kBottomBarIconSize,
-                    height: kBottomBarIconSize,
+                    width: kDefaultIconSize,
+                    height: kDefaultIconSize,
                   ), 
                   const Color(0xffFE9C5E), 
                   () => {
-                    Navigator.of(context).pushNamed(HotelBookingScreen.routeName),
+                    Navigator.of(context).pushNamed(HotelBookingScreen.routeName,),
                   }, 
                   'Hotels'
                 ),
@@ -236,8 +236,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: _buildItemCategory(
                   ImageHelper.loadFromAsset(
                     AssetHelper.icoFlight,
-                    width: kBottomBarIconSize,
-                    height: kBottomBarIconSize,
+                    width: 18,
+                    height: 18,
                   ), 
                   const Color(0xffFE7777), 
                   () => {}, 
@@ -245,14 +245,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(
-                width: kDefaultPadding,
+                width: kMediumPadding,
               ),
               Expanded(
                 child: _buildItemCategory(
                   ImageHelper.loadFromAsset(
                     AssetHelper.icoGroup,
-                    width: kBottomBarIconSize,
-                    height: kBottomBarIconSize,
+                    width: kDefaultIconSize,
+                    height: kDefaultIconSize,
                   ), 
                   const Color(0xff3EC8BC), 
                   () => {}, 

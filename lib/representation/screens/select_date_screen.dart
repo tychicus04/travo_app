@@ -57,6 +57,7 @@ class SelectDateScreen extends StatelessWidget {
           ),
           ButtonWidget(
             title: 'Cancel',
+            color: ColorPalette.primaryColor.withOpacity(0.1),
             ontap: () {
               Navigator.of(context).pop([]);
             },

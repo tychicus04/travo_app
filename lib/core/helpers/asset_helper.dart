@@ -38,4 +38,7 @@ class AssetHelper {
   static const String icoBreakFast = 'assets/icons/ico_break_fast.png';
   static const String icoNonSmoking = 'assets/icons/ico_non_smoke.png';
   static const String icoNonRefundable = 'assets/icons/ico_non_refund.png';
+  static const String icoContact = 'assets/icons/contact.png';
+  static const String icoPromo = 'assets/icons/promo.png';
+  static const String icoAdd = 'assets/icons/add.png';
 }

@@ -52,7 +52,7 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
               (e) => ItemRoomBookingWidget(
               roomModel: e,
               onTap: () {
-                Navigator.of(context).pushNamed(CheckoutScreen.routeName);
+                Navigator.of(context).pushNamed(CheckoutScreen.routeName, arguments: e);
               },
               )
             )
