@@ -41,6 +41,9 @@ dependencies:
   font_awesome_flutter: ^10.5.0
   syncfusion_flutter_datepicker: ^22.2.5
   intl: ^0.18.1
+  flutter_bloc: ^8.1.3
+  email_validator: '^2.1.16'
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:

@@ -48,7 +48,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
             ItemBookingWidget(
               icon: AssetHelper.icoDate, 
               title: 'Select Date', 
-              description: dateSelected ?? '13 Feb - 18 Feb 2021',
+              description: dateSelected ?? 'Select Date',
               onTap: () async {
                 final result = await Navigator.of(context).pushNamed(SelectDateScreen.routeName);
                 if(!(result as List<DateTime?>).any((element) => element == null)) {
@@ -63,11 +63,11 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
             ItemBookingWidget(
               icon: AssetHelper.icoGuestAndRoom, 
               title: 'Guest and Room', 
-              description: '2 Guest, 1 Room',
+              description: guestAndRoomSelected ?? 'Select Guest and Room',
               onTap: () async {
                 final result = await Navigator.of(context).pushNamed(GuestAndRoomBookingScreen.routeName);
                 if(!(result as List<int?>).any((element) => element == null)) {
-                  // guestAndRoomSelected = '${result[0]?.} - ${result[1]?}';
+                  guestAndRoomSelected = '${result[0]} Guest, ${result[1]} Room';
                   setState(() {});
                 }
               }

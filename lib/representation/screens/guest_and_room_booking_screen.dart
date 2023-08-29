@@ -6,9 +6,12 @@ import 'package:project_02/representation/widgets/button_widget.dart';
 import 'package:project_02/representation/widgets/item_add_guest_and_room.dart';
 
 class GuestAndRoomBookingScreen extends StatefulWidget {
-  const GuestAndRoomBookingScreen({super.key});
+  GuestAndRoomBookingScreen({super.key});
 
   static  String routeName = '/guest_and_room_booking_screen.dart';
+
+  int? guest;
+  int? room;
 
   @override
   State<GuestAndRoomBookingScreen> createState() => _GuestAndRoomBookingScreenState();
@@ -25,15 +28,25 @@ class _GuestAndRoomBookingScreenState extends State<GuestAndRoomBookingScreen> {
           const SizedBox(
             height: kMediumPadding * 1.5,
           ),
-          const ItemAddGuestAndRoom(
-            title: 'Guest', 
-            icon: AssetHelper.icoGuest, 
-            initData: 2
-          ),
+          // ItemAddGuestAndRoom(
+          //   title: 'Guest',  
+          //   icon: AssetHelper.icoGuest, 
+          //   children: Picke (
+          //     onSelectionChanged: (PickerSelectionChangedArgs args) {
+          //     if(args.value is PickerDateRange) {
+          //       rangeStartDate = args.value.startDate;
+          //       rangeEndDate = args.value.endDate;
+          //     } else {
+          //       rangeStartDate = null;
+          //       rangeEndDate = null;
+          //     }
+          //   },
+          //   )
+          // ),
           const ItemAddGuestAndRoom(
             title: 'Room', 
             icon: AssetHelper.icoRoom, 
-            initData: 1
+            initData: 2
           ),
           const SizedBox(
             height: kDefaultPadding,
@@ -41,7 +54,7 @@ class _GuestAndRoomBookingScreenState extends State<GuestAndRoomBookingScreen> {
           ButtonWidget(
             title: 'Done',
             ontap: () {
-              Navigator.of(context).pop();
+              // Navigator.of(context).pop([guest, room]);
             },
           ),
         ]

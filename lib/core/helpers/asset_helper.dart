@@ -41,4 +41,7 @@ class AssetHelper {
   static const String icoContact = 'assets/icons/contact.png';
   static const String icoPromo = 'assets/icons/promo.png';
   static const String icoAdd = 'assets/icons/add.png';
+  static const String icoHidePassWord = 'assets/icons/hide_password.png';
+  static const String icoGoogle = 'assets/icons/google.png';
+  static const String icoFacebook = 'assets/icons/facebook.png';
 }

@@ -19,7 +19,9 @@ class AppBarContainerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        
         children: [
+          
           SizedBox(
             height: 186,
             child: AppBar(
@@ -30,7 +32,7 @@ class AppBarContainerWidget extends StatelessWidget {
               backgroundColor: ColorPalette.backgroundScaffoldColor,
               title: title ?? 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  
                   children: [
                     if(implementLeading) 
                       GestureDetector(
@@ -55,9 +57,9 @@ class AppBarContainerWidget extends StatelessWidget {
                         ),
                       ),
                     Expanded(
+                      
                       child: Center(
                         child: Column(
-                          
                           children: [
                             Text(
                               titleString ?? " ",

@@ -5,6 +5,7 @@ import 'package:project_02/core/constants/textstyle_constants.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
 import 'package:project_02/core/helpers/image_healper.dart';
 import 'package:project_02/representation/screens/hotel_booking_screen.dart';
+import 'package:project_02/representation/screens/login_screen.dart';
 // import 'package:project_02/representation/screens/hotel_screen.dart';
 import 'package:project_02/representation/widgets/app_bar_containner.dart';
 
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       'name': 'Dubai',
       'image': AssetHelper.dubai,
+
     },
   ];
   final List<Map<String, String>> listImageRight = [
@@ -37,8 +39,24 @@ class _HomeScreenState extends State<HomeScreen> {
     },
   ];
 
+  Widget _buidlImageHomeScreen(String name, String image, bool isFavourite) {
+    isFavourite = true;
 
-  Widget _buidlImageHomeScreen(String name, String image) {
+    int favouriteCount = 0;
+
+
+    void toggleFavourite() {
+      setState(() {
+        if(isFavourite) {
+          favouriteCount -= 1 ;
+          isFavourite = false;
+        } else {
+          favouriteCount += 1 ;
+          isFavourite = true;
+        }
+      });
+    }
+
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(HotelBookingScreen.routeName, arguments: name);
@@ -54,11 +72,15 @@ class _HomeScreenState extends State<HomeScreen> {
               fit: BoxFit.fitWidth,
               radius: BorderRadius.circular(kItemPadding),
             ),
-            const Padding(
-              padding: EdgeInsets.all(kDefaultPadding),
-              child: Icon(
-                Icons.favorite,
+            Padding(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              child: IconButton(
+                icon: (isFavourite 
+                  ? const Icon(Icons.favorite )
+                  : const Icon(Icons.favorite_border)
+                ),
                 color: Colors.red,
+                onPressed: toggleFavourite,
               ),
             ),
             Positioned(
@@ -224,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ), 
                   const Color(0xffFE9C5E), 
                   () => {
-                    Navigator.of(context).pushNamed(HotelBookingScreen.routeName,),
+                    Navigator.of(context).pushNamed(LoginScreen.routeName),
                   }, 
                   'Hotels'
                 ),
@@ -236,8 +258,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: _buildItemCategory(
                   ImageHelper.loadFromAsset(
                     AssetHelper.icoFlight,
-                    width: 18,
-                    height: 18,
+                    width: kDefaultIconSize,
+                    height: kDefaultIconSize,
                   ), 
                   const Color(0xffFE7777), 
                   () => {}, 
@@ -291,6 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           (e) => _buidlImageHomeScreen(
                             e['name']!,
                             e['image']!,
+                            true
                           ),
                         )
                         .toList()
@@ -306,6 +329,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           (e) => _buidlImageHomeScreen(
                             e['name']!,
                             e['image']!,
+                            false
                           ),
                         )
                         .toList()
