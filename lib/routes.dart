@@ -11,6 +11,7 @@ import 'package:project_02/representation/screens/intro_screen.dart';
 import 'package:project_02/representation/screens/login_screen.dart';
 import 'package:project_02/representation/screens/select_date_screen.dart';
 import 'package:project_02/representation/screens/select_room_screen.dart';
+import 'package:project_02/representation/screens/signup_screen.dart';
 import 'package:project_02/representation/screens/splash_screen.dart';
 import 'package:project_02/representation/screens/main_app.dart';
 
@@ -24,6 +25,7 @@ final Map<String, WidgetBuilder> routes = {
   HotelsScreen.routeName: (context) => const HotelsScreen(), 
   SelectRoomScreen.routeName: (context) => const SelectRoomScreen(), 
   LoginScreen.routeName: (context) => const LoginScreen(), 
+  SignupScreen.routeName: (context) => const SignupScreen(), 
 };
 // ignore: body_might_complete_normally_nullable
 MaterialPageRoute<dynamic>? generateRoutes(RouteSettings settings) {

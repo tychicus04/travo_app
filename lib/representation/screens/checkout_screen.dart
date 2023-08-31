@@ -4,7 +4,6 @@ import 'package:project_02/core/constants/dismension_constants.dart';
 import 'package:project_02/core/constants/textstyle_constants.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
 import 'package:project_02/core/helpers/image_healper.dart';
-import 'package:project_02/core/helpers/size_config.dart';
 import 'package:project_02/data/models/room_model.dart';
 import 'package:project_02/representation/screens/main_app.dart';
 import 'package:project_02/representation/widgets/app_bar_containner.dart';

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,11 +6,11 @@ import 'package:project_02/core/constants/dismension_constants.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
 import 'package:project_02/core/helpers/image_healper.dart';
 import 'package:project_02/core/provider/provider.dart';
+import 'package:project_02/representation/screens/main_app.dart';
+import 'package:project_02/representation/screens/signup_screen.dart';
 import 'package:project_02/representation/widgets/app_bar_containner.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:project_02/representation/widgets/button_widget.dart';
 import 'package:project_02/representation/widgets/dash_line.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,15 +20,55 @@ class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
-    
 
 class _LoginScreenState extends State<LoginScreen> {
+  // controller
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // variable
+  final _usernameErr = 'Tài khoản không hợp lệ';
+  final _passwordErr = 'Mật khẩu phải có tối thiểu 6 kí tự';
+  var _userInvalid = false;
+  var _passwordInvalid = false;
+
+  // boolean
+  final bool _checkbox = false;
+  bool _showPassword = false;
+
+  // handle
+  // void checkValue() {
+  //   _checkbox = !_checkbox;
+  //
+  void onToggleShowPassword() {
+    setState(() {
+      _showPassword = !_showPassword;
+
+    });
+  }
+
+  void onLoginClicked() {
+    setState(() {
+      if(_userController.text.length <6 || _userController.text.contains('@')) {
+        _userInvalid = true;
+      } else {
+        _userInvalid = false;
+      }
+
+      if(_passwordController.text.length <6) {
+        _passwordInvalid = true;
+      } else {
+        _passwordInvalid = false;
+      }
+
+      if(!_passwordInvalid && !_userInvalid) {
+        Navigator.of(context).pushNamed(MainApp.routeName);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool _checkbox = false;
-      void checkValue() {
-        _checkbox = !_checkbox;
-      }
 
     return AppBarContainerWidget(
       implementLeading: true,
@@ -73,18 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
               height: kMediumPadding * 2,
           ),
           TextField(
-            keyboardType: TextInputType.emailAddress,
-            textAlign: TextAlign.center,
-            onChanged: (value) {
-              setState(() {
-                var _email = value;
-                var _emailOk = EmailValidator.validate(_email);
-              });
-            },
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
-              ),
+            controller: _userController,
+            decoration: InputDecoration(
               labelText: 'Email',
+              errorText: _userInvalid ? _usernameErr : null
             ),
           ),
           const SizedBox(
@@ -93,16 +123,16 @@ class _LoginScreenState extends State<LoginScreen> {
           Stack(
             alignment: Alignment.bottomRight,
             children: [
-              const TextField(
-                obscureText: true,
+              TextField(
+                controller: _passwordController,
+                obscureText: !_showPassword,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                  ),
-                  label: Text('Password'),
+                  labelText: 'Password',
+                  errorText: _passwordInvalid ? _passwordErr : null
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: onToggleShowPassword,
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(0, 0, kItemPadding, kItemPadding),
                   child: ImageHelper.loadFromAsset(
@@ -129,15 +159,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Remember me'
               ),
               const Spacer(),
-              const Text(
-                'Forgot password?'
+              GestureDetector(
+                onTap: () {
+
+                },
+                child: const Text(
+                  'Forgot password?',
+                  style: TextStyle(
+                    color: ColorPalette.primaryColor
+                  )
+                ),
               )
             ]
           ),
           ButtonWidget(
             title: 'Log In',
             // button is disabled until something has been entered in both fields.
-            ontap: () {}
+            ontap: onLoginClicked,
             // (_passwordOk && _emailOk) ? ()=> _logInPressed() : null,
           ),
           const DashLineWidget(),
@@ -238,21 +276,21 @@ class _LoginScreenState extends State<LoginScreen> {
             child: RichText(
               text: TextSpan(
                 children: [
-                  TextSpan(
-                    text: 'Don’t have an account?',
+                  const TextSpan(
+                    text: 'Don’t have an account? ',
                     style: TextStyle(
                       color: ColorPalette.text1Color
                     ),
                   ),
                   TextSpan(
                     text: 'Sign up',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: ColorPalette.primaryColor
                     ),
                     recognizer: TapGestureRecognizer()
                     // ignore: deprecated_member_use
                     ..onTap = () { 
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pushNamed(SignupScreen.routeName);
                     },
                   )
 
