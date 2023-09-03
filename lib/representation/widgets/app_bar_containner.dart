@@ -32,7 +32,7 @@ class AppBarContainerWidget extends StatelessWidget {
               backgroundColor: ColorPalette.backgroundScaffoldColor,
               title: title ?? 
                 Row(
-                  
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     if(implementLeading) 
                       GestureDetector(
@@ -57,7 +57,6 @@ class AppBarContainerWidget extends StatelessWidget {
                         ),
                       ),
                     Expanded(
-                      
                       child: Center(
                         child: Column(
                           children: [

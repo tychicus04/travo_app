@@ -4,8 +4,14 @@ import 'package:project_02/core/constants/color_constants.dart';
 import 'package:project_02/core/helpers/local_storage.dart';
 import 'package:project_02/representation/screens/splash_screen.dart';
 import 'package:project_02/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  await Firebase.initializeApp();
   await Hive.initFlutter();
   await LocalStorageHelper.initLocalStorageHelper();
   runApp(const MyApp());

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:project_02/blocs/auth_bloc.dart';
 import 'package:project_02/core/constants/color_constants.dart';
 import 'package:project_02/core/constants/dismension_constants.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
@@ -19,18 +20,16 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  // controller
-  final TextEditingController _userController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
-  // variable
-  final _usernameErr = 'Tài khoản không hợp lệ';
-  final _passwordErr = 'Mật khẩu phải có tối thiểu 6 kí tự';
-  var _userInvalid = false;
-  var _passwordInvalid = false;
+  final AuthBloc bloc = AuthBloc();
+
+  // controller
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   // boolean
-  final bool _checkbox = false;
   bool _showPassword = false;
 
   // handle
@@ -44,24 +43,20 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
-  void onLoginClicked() {
+  void onSignupClicked() {
     setState(() {
-      if(_userController.text.length <6 || _userController.text.contains('@')) {
-        _userInvalid = true;
-      } else {
-        _userInvalid = false;
-      }
-
-      if(_passwordController.text.length <6) {
-        _passwordInvalid = true;
-      } else {
-        _passwordInvalid = false;
-      }
-
-      if(!_passwordInvalid && !_userInvalid) {
-        Navigator.of(context).pushNamed(MainApp.routeName);
+      if(bloc.isValidInfo(_nameController.text, _emailController.text, _passController.text, _phoneController.text )) {
+        bloc.signUp( _nameController.text, _emailController.text, _passController.text, _phoneController.text, () {
+          Navigator.of(context).pushNamed(MainApp.routeName);
+        });
       }
     });
+  }
+
+  @override
+  void dispose() {
+    bloc.dispose();
+    super.dispose();
   }
   
   @override
@@ -76,20 +71,47 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(
               height: kMediumPadding * 2,
             ),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Name',
-
-              ),
+            StreamBuilder(
+              stream: bloc.nameStream,
+              builder: (context, snapshot) {
+                return TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    errorText: snapshot.hasError ? snapshot.error.toString() : null
+                  ),
+                );
+              }
             ),
             const SizedBox(
               height: kMediumPadding,
             ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Email',
-                errorText: _userInvalid ? _usernameErr : null
-              ),
+            StreamBuilder(
+              stream: bloc.emailStream,
+              builder: (context, snapshot) {
+                return TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    errorText: snapshot.hasError ? snapshot.error.toString() : null
+                  ),
+                );
+              }
+            ),
+            const SizedBox(
+              height: kMediumPadding,
+            ),
+            StreamBuilder(
+              stream: bloc.phoneStream,
+              builder: (context, snapshot) {
+                return TextField(
+                  controller: _phoneController,
+                  decoration: InputDecoration(
+                    labelText: 'Phone',
+                    errorText: snapshot.hasError ? snapshot.error.toString() : null
+                  ),
+                );
+              }
             ),
             const SizedBox(
               height: kMediumPadding,
@@ -97,12 +119,18 @@ class _SignupScreenState extends State<SignupScreen> {
             Stack(
               alignment: Alignment.bottomRight,
               children: [
-                TextField(
-                  obscureText: !_showPassword,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    errorText: _passwordInvalid ? _passwordErr : null
-                  ),
+                StreamBuilder(
+                  stream: bloc.passStream,
+                  builder: (context, snapshot) {
+                    return TextField(
+                      controller: _passController,
+                      obscureText: !_showPassword,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        errorText: snapshot.hasError ? snapshot.error.toString() : null
+                      ),
+                    );
+                  }
                 ),
                 GestureDetector(
                   onTap: onToggleShowPassword,
@@ -175,7 +203,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ButtonWidget(
               title: 'Sign up',
                       // button is disabled until something has been entered in both fields.
-              ontap: onLoginClicked
+              ontap: onSignupClicked
                       // (_passwordOk && _emailOk) ? ()=> _logInPressed() : null,
             ),
             const DashLineWidget(),

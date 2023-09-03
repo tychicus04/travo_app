@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_02/blocs/auth_bloc.dart';
 import 'package:project_02/core/constants/color_constants.dart';
 import 'package:project_02/core/constants/dismension_constants.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
@@ -22,100 +23,57 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // controller
-  final TextEditingController _userController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
-  // variable
-  final _usernameErr = 'Tài khoản không hợp lệ';
-  final _passwordErr = 'Mật khẩu phải có tối thiểu 6 kí tự';
-  var _userInvalid = false;
-  var _passwordInvalid = false;
+  final AuthBloc bloc =  AuthBloc();
+
+  // controller
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
 
   // boolean
   final bool _checkbox = false;
-  bool _showPassword = false;
+  bool _showPass = false;
 
   // handle
   // void checkValue() {
   //   _checkbox = !_checkbox;
   //
-  void onToggleShowPassword() {
+  void onToggleShowPass() {
     setState(() {
-      _showPassword = !_showPassword;
+      _showPass = !_showPass;
 
     });
   }
 
   void onLoginClicked() {
-    setState(() {
-      if(_userController.text.length <6 || _userController.text.contains('@')) {
-        _userInvalid = true;
-      } else {
-        _userInvalid = false;
-      }
-
-      if(_passwordController.text.length <6) {
-        _passwordInvalid = true;
-      } else {
-        _passwordInvalid = false;
-      }
-
-      if(!_passwordInvalid && !_userInvalid) {
-        Navigator.of(context).pushNamed(MainApp.routeName);
-      }
-    });
+    // setState(() {
+    //   if(bloc.isValidInfo(_userController.text, _passController.text)) {
+    //     Navigator.of(context).pushNamed(MainApp.routeName);
+    //   }
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return AppBarContainerWidget(
       implementLeading: true,
-      titleString: 'Login  ',
-      // title: const Padding(
-      //   padding: EdgeInsets.symmetric(
-      //     horizontal: kMediumPadding,
-      //   ),
-      //   child: Row(
-      //     children: [
-      //       Column(
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: [
-      //           Text(
-      //             'Login', 
-      //             style: TextStyle(
-      //               fontWeight: FontWeight.bold,
-      //               fontSize: 20,
-      //             ),
-      //           ),
-      //           SizedBox(
-      //             height: kMediumPadding,
-      //           ),
-      //           Text(
-                  
-      //             'Hi, Welcome back!', 
-      //             style: TextStyle(
-      //               fontWeight: FontWeight.bold,
-      //               fontSize: 12,
-      //             ),
-      //           ),
-      //         ]
-      //       ),
-      //     ]
-      //   ),
-      // ),
+      titleString: 'Login',
       child: Column(
         children: [
           const SizedBox(
               height: kMediumPadding * 2,
           ),
-          TextField(
-            controller: _userController,
-            decoration: InputDecoration(
-              labelText: 'Email',
-              errorText: _userInvalid ? _usernameErr : null
-            ),
+          StreamBuilder(
+            stream: bloc.emailStream,
+            builder: (context, snapshot) {
+              return TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  errorText: snapshot.hasError ? snapshot.error.toString() : null,
+                ),
+              );
+            }
           ),
           const SizedBox(
               height: kMediumPadding,
@@ -123,16 +81,21 @@ class _LoginScreenState extends State<LoginScreen> {
           Stack(
             alignment: Alignment.bottomRight,
             children: [
-              TextField(
-                controller: _passwordController,
-                obscureText: !_showPassword,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  errorText: _passwordInvalid ? _passwordErr : null
-                ),
+              StreamBuilder(
+                stream: bloc.passStream,
+                builder: (context, snapshot) {
+                  return TextField(
+                    controller: _passController,
+                    obscureText: !_showPass,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      errorText: snapshot.hasError ? snapshot.error.toString() : null,
+                    ),
+                  );
+                }
               ),
               GestureDetector(
-                onTap: onToggleShowPassword,
+                onTap: onToggleShowPass,
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(0, 0, kItemPadding, kItemPadding),
                   child: ImageHelper.loadFromAsset(

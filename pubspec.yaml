@@ -45,6 +45,9 @@ dependencies:
   email_validator: '^2.1.16'
   url_launcher: ^6.1.12
   country_picker: ^2.0.20
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.9.0
+  firebase_database:
 
 dev_dependencies:
   flutter_test:
