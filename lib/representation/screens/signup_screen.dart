@@ -9,6 +9,8 @@ import 'package:project_02/representation/screens/main_app.dart';
 import 'package:project_02/representation/widgets/app_bar_containner.dart';
 import 'package:project_02/representation/widgets/button_widget.dart';
 import 'package:project_02/representation/widgets/dash_line.dart';
+import 'package:project_02/representation/widgets/loading_dialog.dart';
+import 'package:project_02/representation/widgets/msg_dialog.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -46,8 +48,14 @@ class _SignupScreenState extends State<SignupScreen> {
   void onSignupClicked() {
     setState(() {
       if(bloc.isValidInfo(_nameController.text, _emailController.text, _passController.text, _phoneController.text )) {
-        bloc.signUp( _nameController.text, _emailController.text, _passController.text, _phoneController.text, () {
+
+        LoadingDialog.showLoadingDialog(context, 'Loading...');
+        bloc.signUp( _nameController.text, _emailController.text, _phoneController.text , _passController.text, () {
+          LoadingDialog.hideLoadingDialog(context);
           Navigator.of(context).pushNamed(MainApp.routeName);
+        }, (msg) {
+          LoadingDialog.hideLoadingDialog(context);
+          MsgDialog.showMsgDialog(context, 'Sign-In', msg);
         });
       }
     });

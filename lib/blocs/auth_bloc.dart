@@ -28,23 +28,30 @@ class AuthBloc {
     }
     _emailController.sink.add('OK');
 
-    if(!Validation.isValidPass(pass)) {
-      _passController.sink.addError('Mật khẩu phải chứa trên 6 kí tự');
-      return false;
-    }
-    _passController.sink.add('OK');
-
     if(!Validation.isValidPhone(phone)) {
       _phoneController.sink.addError('Số điện thoại không hợp lệ');
       return false;
     }
     _phoneController.sink.add('OK');
 
+    if(!Validation.isValidPass(pass)) {
+      _passController.sink.addError('Mật khẩu phải chứa trên 6 kí tự');
+      return false;
+    }
+    _passController.sink.add('OK');
+
+
     return true;
   }
 
-  void signUp( String name, String email, String phone, String pass, Function onSuccess) {
-    _fireAuth.signUp(name, email, phone, pass, onSuccess);
+  void signUp( String name, String email, String phone, String pass, 
+    Function onSuccess, Function(String) onError) {
+      _fireAuth.signUp(name, email, phone, pass, onSuccess, onError);
+  }
+
+  void signIn(String email, String pass, 
+    Function onSuccess, Function(String) onSignInError) {
+      _fireAuth.signIn(email, pass, onSuccess, onSignInError);
   }
 
   void dispose() {

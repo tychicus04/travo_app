@@ -7,11 +7,14 @@ import 'package:project_02/core/constants/dismension_constants.dart';
 import 'package:project_02/core/helpers/asset_helper.dart';
 import 'package:project_02/core/helpers/image_healper.dart';
 import 'package:project_02/core/provider/provider.dart';
+import 'package:project_02/main.dart';
 import 'package:project_02/representation/screens/main_app.dart';
 import 'package:project_02/representation/screens/signup_screen.dart';
 import 'package:project_02/representation/widgets/app_bar_containner.dart';
 import 'package:project_02/representation/widgets/button_widget.dart';
 import 'package:project_02/representation/widgets/dash_line.dart';
+import 'package:project_02/representation/widgets/loading_dialog.dart';
+import 'package:project_02/representation/widgets/msg_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -46,12 +49,20 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onLoginClicked() {
-    // setState(() {
-    //   if(bloc.isValidInfo(_userController.text, _passController.text)) {
-    //     Navigator.of(context).pushNamed(MainApp.routeName);
-    //   }
-    // });
+    String email = _emailController.text;
+    String pass = _passController.text;
+    var authBloc = MyApp.of(context)?.bloc;
+    LoadingDialog.showLoadingDialog(context, 'Loading...');
+    authBloc?.signIn(email, pass, () {
+      LoadingDialog.hideLoadingDialog(context);
+      Navigator.of(context).pushNamed(MainApp.routeName);
+    }, (msg) {
+      LoadingDialog.hideLoadingDialog(context);
+      MsgDialog(context, 'Sign-In', msg);
+    });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
